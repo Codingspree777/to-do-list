@@ -1,1 +1,3 @@
-HashChangeEvent
+window.onload = function (){
+
+}
