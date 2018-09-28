@@ -1,11 +1,11 @@
 
 /* Include the padding and border in an element's total width and height */
-* {
+body {
   box-sizing: border-box;
 }
 
 /* Remove margins and padding from the list */
-body {
+ul {
   margin: 0;
   padding: 0;
 }
