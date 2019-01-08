@@ -43,6 +43,7 @@ const submitBtn = document.querySelector('#form-submit');
   }
  
  
+
   function addTodo(event) {
     event.preventDefault(); //prevents the page from reloading
     let addedItem = document.getElementById('text').value
@@ -60,9 +61,8 @@ const submitBtn = document.querySelector('#form-submit');
     todoDiv.appendChild(deleteBtn);
     todoListCont.appendChild(todoDiv);
     console.log(todos)
-
+    document.getElementById('text').value = '';
    }
-
 
 
 }
