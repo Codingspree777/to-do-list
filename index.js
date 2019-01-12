@@ -64,6 +64,6 @@ window.onload = function() {
       document.getElementById('text').value = '';
      }
   
-  //add to master
+  
   }
   
