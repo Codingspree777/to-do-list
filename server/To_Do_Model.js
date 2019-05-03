@@ -8,15 +8,14 @@ const Schema = mongoose.Schema;
 // All of these should be required.
 // Create your schema here
 
-const studentSchema = new Schema({
+const toDoSchema = new Schema({
     // define schema here
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    age: {type: Number, required: true},
+    item: {type: String, required: true},
+    completed: {type: Boolean, required: true},
   });
 
 // You must export your model through module.exports
 // The collection name should be 'student'
  
 
-module.exports = mongoose.model('Student', studentSchema);
+module.exports = mongoose.model('ToDoList', toDoSchema);

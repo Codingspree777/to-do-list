@@ -1,17 +1,11 @@
-const Student = require('./StudentModel');
+const toDoList = require('./To_Do_Model');
 
-const StudentController = {
-  // Create a new student in the Database
+const toDoListController = {
+  // Create a new toDoList in the Database
   // Their information will be sent in the request body
   // This should send the created student
-  createStudent(req, res) {
-  //  let Student = new student({ firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age});
-    
-  //   Student.save(function (err, info) {
-  //   if (err)  res.sendStatus(418).send(err);
-  //    res.send(info);
-  //   });
-  Student.create({firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age}, (err, info)=>{
+  createToDoList(req, res) {
+  toDoList.create({item: req.body.item, completed: req.body.completed}, (err, info)=>{
       if (err)  res.sendStatus(418).send(err);
      res.status(200).send(info);
   })
@@ -21,7 +15,7 @@ const StudentController = {
   // Their first name will be in the request parameter 'name'
   // This should send the found student
   getStudent(req, res) {
-    Student.findOne({firstName: req.params.name}, (err, info) => {
+    toDoList.findOne({firstName: req.params.name}, (err, info) => {
       if (err) res.sendStatus(418).send(err);
         res.send(info)
     });
@@ -31,7 +25,7 @@ const StudentController = {
   // The student's first name will be in the request parameter 'name'
   // The student's new first name will be in the request body
   updateStudent(req, res) {
-    Student.findOneAndUpdate({ firstName: req.params.name },{new:true}, (err, info) => {
+    toDoList.findOneAndUpdate({ firstName: req.params.name },{new:true}, (err, info) => {
       if (err) res.sendStatus(418).send(err);
       res.send(info)
     });
@@ -43,7 +37,7 @@ const StudentController = {
   // The student's first name will be sent in the request parameter 'name'
   // This should send a success status code
   deleteStudent(req, res) {
-    Student.findOneAndDelete({ firstName: req.name }, function (err) {
+    toDoList.findOneAndDelete({ firstName: req.name }, function (err) {
       if (err) res.sendStatus(418).send(err);
      res.sendStatus(200);
     });
@@ -51,4 +45,4 @@ const StudentController = {
   },
 };
 
-module.exports = StudentController;
+module.exports = toDoListController;

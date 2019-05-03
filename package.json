@@ -2,9 +2,9 @@
   "name": "To-Do-List",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./server/main.js",
   "scripts": {
-    "start": "nodemon main.js",
+    "start": "nodemon ./server/main.js",
     "merge": "node test/merge.js",
     "get-test-utils": "node test/get-test-utils.js",
     "update-package": "node test/update-package.js",
