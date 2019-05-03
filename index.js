@@ -45,7 +45,7 @@ window.onload = function() {
       console.log("remove", remove)
       todoListCont.removeChild(remove);
       console.log('i', i);
-      console.log(todos)
+      console.log(todos);
     }
    
    
