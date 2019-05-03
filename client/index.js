@@ -1,24 +1,15 @@
 window.onload = function () {
   //initial fetch to get list,  once connected to db
 
-  fetch("/ToDoList/list")
-  .then(response => response.json())
-  .then(data =>{
-     render(data);
-  });
-
+  const getData = () => {
+    fetch("/ToDoList/list")
+    .then(response => response.json())
+    .then(data =>{
+      render(data);
+    });
+  }
+  getData();
   
-
-  // const todos = [{
-  //     item: 'do laundry',
-  //     completed: false
-  //   },
-  //   {
-  //     item: 'take out garbage',
-  //     completed: false
-  //   },
-  // ];
-
 
   //button function
   const submitBtn = document.querySelector('#form-submit');
@@ -36,7 +27,7 @@ window.onload = function () {
       let todoDiv = document.createElement('div');
       todoDiv.setAttribute("id", i)
       todoDiv.setAttribute("class", "all")
-      let textNode = document.createTextNode(todosData[i].item);
+      let textNode = document.createTextNode(`${i+1}) ${todosData[i].item} / done? ${todosData[i].completed}`);
       let deleteBtn = document.createElement('button');
       deleteBtn.innerText = 'delete';
       deleteBtn.addEventListener('click', function () {
@@ -49,15 +40,11 @@ window.onload = function () {
   }
 
    
-  // render(todos)
 
   function handleDelete(i) {
     todos.splice(i, 1);
     let remove = document.getElementById(i)
-    console.log("remove", remove)
     todoListCont.removeChild(remove);
-    console.log('i', i);
-    console.log(todos);
   }
 
 
@@ -74,14 +61,21 @@ window.onload = function () {
     };
     let addedItem = document.getElementById('text').value;
     //post to DB
+    (async () => {
+      const rawResponse = await fetch('/ToDoList/create', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({item: addedItem, completed: false})
+      });
+      const content = await rawResponse.json();
+    
+      console.log(content);
+    })();
+   
     //fetch again to GET updated DB
-    todos.push({
-      item: addedItem,
-      completed: false
-    });
-    render(todos);
-
+    getData();
   }
-
-
 }
