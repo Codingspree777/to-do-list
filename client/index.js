@@ -1,6 +1,16 @@
 window.onload = function () {
+  //initial fetch to get list,  once connected to db
+
+  console.log("test");
 
 
+  // fetch('/ToDoList/list')
+  // .then(function(response) {
+  //   return response.json();
+  // })
+  // .then(function(list) {
+  //  render(list);
+  // });  
 
   const todos = [{
       item: 'do laundry',
@@ -11,7 +21,6 @@ window.onload = function () {
       completed: false
     },
   ];
-
 
 
   //button function

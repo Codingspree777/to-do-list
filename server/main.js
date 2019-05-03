@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path')
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -16,16 +18,52 @@ mongoose.connection.once('open', () => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+// app.get('/', (req, res) => {
+//   //response with set header
+//   ///set path
+//   let file = path.join(__dirname, '../client/', 'this.html')
+//   //set header
+//   res.header("Content-Type", "text/html; charset=utf-8");
+//   //need since a __dirname is created, we can shortcut to send file. 
+//   res.sendFile(file);
+    
+// })
+
+app.get('/', (req, res) => {
+  //response with set header
+  ///set path
+  let file3 = path.join(__dirname, '../client/', 'index.js')
+  //set header
+  res.header("Content-Type", "javascript/JSON");
+  //need since a __dirname is created, we can shortcut to send file. 
+  res.sendFile(file3);
+    
+})
+
+// app.get('/styles.css', (req, res) => {
+//   //response with set header
+//   let file2 = path.join(__dirname, '../client', 'styles.css')
+//   ///set path
+//   res.header("Content-Type", "text/css; charset=UTF-8");
+//   //set header
+//   //need since a __dirname is created, we can shortcut to send file. 
+//   res.sendFile(file2);
+    
+// })
+
+
+
 const toDoListRouter = express.Router();
 
+
+
+// Get initial list if any from the database
+toDoListRouter.get('/:list', toDoListController.getList);
 // Create a student in the database
 // localhost://3000/student
-toDoListRouter.post('/', toDoListController.createToDoList);
+toDoListRouter.post('/create', toDoListController.createToDoList);
 
-
-// Get a student from the database
-// localhost://3000/student/"name"
-toDoListRouter.get('/:list', toDoListController.getStudent);
 
 // Change a students name
 // localhost://3000/student/"name"

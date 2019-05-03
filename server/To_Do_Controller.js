@@ -1,6 +1,13 @@
 const toDoList = require('./To_Do_Model');
 
 const toDoListController = {
+  // Get a initial list from the database and send it in the response
+  getList(req, res) {
+    toDoList.find({}, (err, info) => {
+      if (err) res.sendStatus(418).send(err);
+        res.send(info)
+    });
+  },
   // Create a new toDoList in the Database
   // Their information will be sent in the request body
   // This should send the created student
@@ -11,15 +18,7 @@ const toDoListController = {
   })
   },
 
-  // Get a student from the database and send it in the response
-  // Their first name will be in the request parameter 'name'
-  // This should send the found student
-  getStudent(req, res) {
-    toDoList.findOne({firstName: req.params.name}, (err, info) => {
-      if (err) res.sendStatus(418).send(err);
-        res.send(info)
-    });
-  },
+  
 
   // Get a student from the database and update the student
   // The student's first name will be in the request parameter 'name'
