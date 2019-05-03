@@ -17,40 +17,41 @@ mongoose.connection.once('open', () => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use(express.static('client')); 
 
-
-// app.get('/', (req, res) => {
-//   //response with set header
-//   ///set path
-//   let file = path.join(__dirname, '../client/', 'this.html')
-//   //set header
-//   res.header("Content-Type", "text/html; charset=utf-8");
-//   //need since a __dirname is created, we can shortcut to send file. 
-//   res.sendFile(file);
-    
-// })
 
 app.get('/', (req, res) => {
   //response with set header
   ///set path
+  let file = path.join(__dirname, '../client/', 'this.html')
+  //set header
+  res.header("Content-Type", "text/html; charset=utf-8");
+  //need since a __dirname is created, we can shortcut to send file. 
+  res.sendFile(file);
+    
+})
+
+app.get('/index.js', (req, res) => {
+  //response with set header
+  ///set path
   let file3 = path.join(__dirname, '../client/', 'index.js')
   //set header
-  res.header("Content-Type", "javascript/JSON");
+  res.header("Content-Type", "text/javascript");
   //need since a __dirname is created, we can shortcut to send file. 
   res.sendFile(file3);
     
 })
 
-// app.get('/styles.css', (req, res) => {
-//   //response with set header
-//   let file2 = path.join(__dirname, '../client', 'styles.css')
-//   ///set path
-//   res.header("Content-Type", "text/css; charset=UTF-8");
-//   //set header
-//   //need since a __dirname is created, we can shortcut to send file. 
-//   res.sendFile(file2);
+app.get('/styles.css', (req, res) => {
+  //response with set header
+  let file2 = path.join(__dirname, '../client', 'styles.css')
+  ///set path
+  res.header("Content-Type", "text/css; charset=UTF-8");
+  //set header
+  //need since a __dirname is created, we can shortcut to send file. 
+  res.sendFile(file2);
     
-// })
+})
 
 
 

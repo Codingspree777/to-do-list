@@ -1,26 +1,23 @@
 window.onload = function () {
   //initial fetch to get list,  once connected to db
 
-  console.log("test");
+  fetch("/ToDoList/list")
+  .then(response => response.json())
+  .then(data =>{
+     render(data);
+  });
 
+  
 
-  // fetch('/ToDoList/list')
-  // .then(function(response) {
-  //   return response.json();
-  // })
-  // .then(function(list) {
-  //  render(list);
-  // });  
-
-  const todos = [{
-      item: 'do laundry',
-      completed: false
-    },
-    {
-      item: 'take out garbage',
-      completed: false
-    },
-  ];
+  // const todos = [{
+  //     item: 'do laundry',
+  //     completed: false
+  //   },
+  //   {
+  //     item: 'take out garbage',
+  //     completed: false
+  //   },
+  // ];
 
 
   //button function
@@ -39,7 +36,7 @@ window.onload = function () {
       let todoDiv = document.createElement('div');
       todoDiv.setAttribute("id", i)
       todoDiv.setAttribute("class", "all")
-      let textNode = document.createTextNode(todos[i].item);
+      let textNode = document.createTextNode(todosData[i].item);
       let deleteBtn = document.createElement('button');
       deleteBtn.innerText = 'delete';
       deleteBtn.addEventListener('click', function () {
@@ -51,7 +48,8 @@ window.onload = function () {
     }
   }
 
-  render(todos)
+   
+  // render(todos)
 
   function handleDelete(i) {
     todos.splice(i, 1);
