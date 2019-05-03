@@ -1,0 +1,33 @@
+{
+  "name": "week-4-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js",
+    "merge": "node test/merge.js",
+    "get-test-utils": "node test/get-test-utils.js",
+    "update-package": "node test/update-package.js",
+    "lint": "node test/lint.js server.js",
+    "test": "node test/remote-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodesmithLLC/week-4-assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodesmithLLC/week-4-assessment/issues"
+  },
+  "homepage": "https://github.com/CodesmithLLC/week-4-assessment#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "mongoose": "^5.4.3",
+    "nodemon": "^1.11.0",
+    "request": "^2.79.0",
+    "sequelize": "^3.30.0"
+  }
+}
