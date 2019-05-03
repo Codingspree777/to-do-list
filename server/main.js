@@ -72,7 +72,7 @@ toDoListRouter.patch('/:list', toDoListController.updateStudent);
 
 // Delete a student from the database
 // localhost://3000/student/"name"
-toDoListRouter.delete('/:list', toDoListController.deleteStudent);
+toDoListRouter.delete('/list', toDoListController.deleteItem);
 
 app.use('/ToDoList', toDoListRouter);
 

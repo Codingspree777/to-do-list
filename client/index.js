@@ -1,6 +1,6 @@
 window.onload = function () {
+  
   //initial fetch to get list,  once connected to db
-
   const getData = () => {
     fetch("/ToDoList/list")
     .then(response => response.json())
@@ -11,7 +11,7 @@ window.onload = function () {
   getData();
   
 
-  //button function
+  //button function to create item
   const submitBtn = document.querySelector('#form-submit');
   submitBtn.addEventListener('click', addTodo, false);
 
@@ -27,11 +27,12 @@ window.onload = function () {
       let todoDiv = document.createElement('div');
       todoDiv.setAttribute("id", i)
       todoDiv.setAttribute("class", "all")
+      let itemText = document.createTextNode(todosData[i].item)
       let textNode = document.createTextNode(`${i+1}) ${todosData[i].item} / done? ${todosData[i].completed}`);
       let deleteBtn = document.createElement('button');
       deleteBtn.innerText = 'delete';
       deleteBtn.addEventListener('click', function () {
-        handleDelete(i);
+        handleDelete(itemText);
       }, false);
       todoDiv.appendChild(textNode);
       todoDiv.appendChild(deleteBtn);
@@ -41,10 +42,17 @@ window.onload = function () {
 
    
 
-  function handleDelete(i) {
-    todos.splice(i, 1);
-    let remove = document.getElementById(i)
-    todoListCont.removeChild(remove);
+  function handleDelete(str) {
+    // console.log(str);
+    fetch('/ToDoList/list', {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({"item": str})
+    })
+    while (todoListCont.firstChild) {
+      todoListCont.removeChild(todoListCont.firstChild)
+    };
+    getData();
   }
 
 

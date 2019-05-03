@@ -35,13 +35,12 @@ const toDoListController = {
   // Delete a student from the database
   // The student's first name will be sent in the request parameter 'name'
   // This should send a success status code
-  deleteStudent(req, res) {
-    toDoList.findOneAndDelete({ firstName: req.name }, function (err) {
+  deleteItem(req, res) {
+    toDoList.findOneAndDelete({}, function (err) {
       if (err) res.sendStatus(418).send(err);
      res.sendStatus(200);
     });
-
   },
-};
+};  
 
 module.exports = toDoListController;
