@@ -1,5 +1,5 @@
 {
-  "name": "week-4-assessment",
+  "name": "To-Do-List",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -11,17 +11,9 @@
     "lint": "node test/lint.js server.js",
     "test": "node test/remote-test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodesmithLLC/week-4-assessment.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CodesmithLLC/week-4-assessment/issues"
-  },
-  "homepage": "https://github.com/CodesmithLLC/week-4-assessment#readme",
   "dependencies": {
     "body-parser": "^1.16.0",
     "express": "^4.14.0",
