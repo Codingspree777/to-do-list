@@ -1,6 +1,7 @@
 window.onload = function () {
-  
   //initial fetch to get list,  once connected to db
+
+
   const getData = () => {
     fetch("/ToDoList/list")
     .then(response => response.json())
@@ -25,16 +26,22 @@ window.onload = function () {
     for (let i = 0; i < todosData.length; i++) {
       //move everything below to a function
       let todoDiv = document.createElement('div');
-      todoDiv.setAttribute("id", i)
-      todoDiv.setAttribute("class", "all")
-      let itemText = document.createTextNode(todosData[i].item)
+      todoDiv.setAttribute("id", i);
+      todoDiv.setAttribute("class", "all");
+      let itemText = document.createTextNode(todosData[i].item);
       let textNode = document.createTextNode(`${i+1}) ${todosData[i].item} / done? ${todosData[i].completed}`);
       let deleteBtn = document.createElement('button');
-      deleteBtn.innerText = 'delete';
+      deleteBtn.innerText = 'x';
       deleteBtn.addEventListener('click', function () {
         handleDelete(itemText);
       }, false);
+      let updateBtn = document.createElement('button');
+      updateBtn.innerText = 'update';
+      updateBtn.addEventListener('click', function () {
+        handleUpdate(itemText);
+      }, false);
       todoDiv.appendChild(textNode);
+      todoDiv.appendChild(updateBtn);
       todoDiv.appendChild(deleteBtn);
       todoListCont.appendChild(todoDiv);
     }
@@ -42,17 +49,15 @@ window.onload = function () {
 
    
 
-  function handleDelete(str) {
-    event.preventDefault();
-    let output = JSON.stringify({item: str});
+ function handleDelete(str) { 
+  event.preventDefault();
+  str = str.wholeText;
     fetch('/ToDoList/list', {
-    method: 'DELETE',
+    method: 'delete',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json'},
-    body: output
+    body: JSON.stringify({item: str})
     })
-    
     while (todoListCont.firstChild) {
       todoListCont.removeChild(todoListCont.firstChild)
     };
@@ -88,6 +93,22 @@ window.onload = function () {
     })();
    
     //fetch again to GET updated DB
+    getData();
+  }
+
+  function handleUpdate(string) {
+    event.preventDefault();
+    string = string.wholeText;
+    fetch('/ToDoList/list', {
+      method: 'PATCH',
+      body: JSON.stringify({
+       item: string,
+       completed: true
+      })
+    })
+    while (todoListCont.firstChild) {
+      todoListCont.removeChild(todoListCont.firstChild)
+    };
     getData();
   }
 }

@@ -9,15 +9,16 @@ const toDoListController = require('./To_Do_Controller');
 
 const PORT = 3000;
 
-mongoose.connect('mongodb+srv://student:ilovetesting@cluster0-zljzt.mongodb.net/test?retryWrites=true');
+mongoose.connect('mongodb+srv://student:ilovetesting@cluster0-zljzt.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
+//mongoose.connect('mongodb+srv://student:ilovetesting@cluster0-zljzt.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-//app.use(express.static('client')); 
+// app.use(express.static('client')); 
 
 
 app.get('/', (req, res) => {
@@ -38,9 +39,10 @@ app.get('/index.js', (req, res) => {
   //set header
   res.header("Content-Type", "text/javascript");
   //need since a __dirname is created, we can shortcut to send file. 
-  res.sendFile(file3);
-    
+  res.sendFile(file3); 
 })
+
+
 
 app.get('/styles.css', (req, res) => {
   //response with set header
@@ -72,7 +74,7 @@ toDoListRouter.patch('/:list', toDoListController.updateItem);
 
 // Delete a student from the database
 // localhost://3000/student/"name"
-toDoListRouter.delete('/list', toDoListController.deleteItem);
+toDoListRouter.delete('/:list', toDoListController.deleteItem);
 
 app.use('/ToDoList', toDoListRouter);
 

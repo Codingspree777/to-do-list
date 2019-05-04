@@ -24,7 +24,8 @@ const toDoListController = {
   // The student's first name will be in the request parameter 'name'
   // The student's new first name will be in the request body
   updateItem(req, res) {
-    toDoList.findOneAndUpdate({ completed: req.body.completed },{new:true}, (err, info) => {
+    console.log(req.body.item)
+    toDoList.findOneAndReplace({item: req.body.item},{completed:true}, (err, info) => {
       if (err) res.sendStatus(418).send(err);
       res.send(info)
     });
@@ -36,8 +37,6 @@ const toDoListController = {
   // The student's first name will be sent in the request parameter 'name'
   // This should send a success status code
   deleteItem(req, res) {
-    console.log(req.body.item);
-    console.log("body and delete")
     toDoList.findOneAndDelete({item: req.body.item}, function (err) {
       if (err) res.sendStatus(418).send(err);
      res.sendStatus(200);
