@@ -43,12 +43,16 @@ window.onload = function () {
    
 
   function handleDelete(str) {
-    // console.log(str);
+    event.preventDefault();
+    let output = JSON.stringify({item: str});
     fetch('/ToDoList/list', {
     method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"item": str})
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'},
+    body: output
     })
+    
     while (todoListCont.firstChild) {
       todoListCont.removeChild(todoListCont.firstChild)
     };

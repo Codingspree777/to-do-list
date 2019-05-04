@@ -23,8 +23,8 @@ const toDoListController = {
   // Get a student from the database and update the student
   // The student's first name will be in the request parameter 'name'
   // The student's new first name will be in the request body
-  updateStudent(req, res) {
-    toDoList.findOneAndUpdate({ firstName: req.params.name },{new:true}, (err, info) => {
+  updateItem(req, res) {
+    toDoList.findOneAndUpdate({ completed: req.body.completed },{new:true}, (err, info) => {
       if (err) res.sendStatus(418).send(err);
       res.send(info)
     });
@@ -36,7 +36,9 @@ const toDoListController = {
   // The student's first name will be sent in the request parameter 'name'
   // This should send a success status code
   deleteItem(req, res) {
-    toDoList.findOneAndDelete({}, function (err) {
+    console.log(req.body.item);
+    console.log("body and delete")
+    toDoList.findOneAndDelete({item: req.body.item}, function (err) {
       if (err) res.sendStatus(418).send(err);
      res.sendStatus(200);
     });

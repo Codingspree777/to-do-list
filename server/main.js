@@ -68,7 +68,7 @@ toDoListRouter.post('/create', toDoListController.createToDoList);
 
 // Change a students name
 // localhost://3000/student/"name"
-toDoListRouter.patch('/:list', toDoListController.updateStudent);
+toDoListRouter.patch('/:list', toDoListController.updateItem);
 
 // Delete a student from the database
 // localhost://3000/student/"name"
