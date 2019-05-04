@@ -99,8 +99,11 @@ window.onload = function () {
   function handleUpdate(string) {
     event.preventDefault();
     string = string.wholeText;
+    console.log(string);
     fetch('/ToDoList/list', {
       method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'},
       body: JSON.stringify({
        item: string,
        completed: true

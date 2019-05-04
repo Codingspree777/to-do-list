@@ -24,8 +24,8 @@ const toDoListController = {
   // The student's first name will be in the request parameter 'name'
   // The student's new first name will be in the request body
   updateItem(req, res) {
-    console.log(req.body.item)
-    toDoList.findOneAndReplace({item: req.body.item},{completed:true}, (err, info) => {
+    console.log(req.body);
+    toDoList.findOneAndReplace({item: req.body.item},{item: req.body.item, completed:true}, (err, info) => {
       if (err) res.sendStatus(418).send(err);
       res.send(info)
     });
