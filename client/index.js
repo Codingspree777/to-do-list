@@ -12,9 +12,7 @@ window.onload = function () {
   getData();
   
 
-  //button function to create item
-  const submitBtn = document.querySelector('#form-submit');
-  submitBtn.addEventListener('click', addTodo, false);
+  
 
 
   //we are going to display our todos here
@@ -49,7 +47,7 @@ window.onload = function () {
 
    
 
- function handleDelete(str) { 
+ const handleDelete = (str) =>{ 
   event.preventDefault();
   str = str.wholeText;
     fetch('/ToDoList/list', {
@@ -66,7 +64,7 @@ window.onload = function () {
 
 
 
-  function addTodo(event) {
+  const addTodo = (event) =>{
     event.preventDefault(); //prevents the page from reloading
     // for(let k = 0; k < todos.length; k++){
     //   let removeAll = document.getElementById(k);
@@ -96,7 +94,11 @@ window.onload = function () {
     getData();
   }
 
-  function handleUpdate(string) {
+  //button function to create item
+  const submitBtn = document.querySelector('#form-submit');
+  submitBtn.addEventListener('click', addTodo, false);
+
+  const handleUpdate = (string) =>{
     event.preventDefault();
     string = string.wholeText;
     console.log(string);
