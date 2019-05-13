@@ -4,15 +4,15 @@ window.onload = function () {
 
   const getData = () => {
     fetch("/ToDoList/list")
-    .then(response => response.json())
-    .then(data =>{
-      render(data);
-    });
+      .then(response => response.json())
+      .then(data => {
+        render(data);
+      });
   }
   getData();
-  
 
-  
+
+
 
 
   //we are going to display our todos here
@@ -45,16 +45,19 @@ window.onload = function () {
     }
   }
 
-   
 
- const handleDelete = (str) =>{ 
-  event.preventDefault();
-  str = str.wholeText;
+
+  const handleDelete = (str) => {
+    event.preventDefault();
+    str = str.wholeText;
     fetch('/ToDoList/list', {
-    method: 'delete',
-    headers: {
-      'Content-Type': 'application/json'},
-    body: JSON.stringify({item: str})
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        item: str
+      })
     })
     while (todoListCont.firstChild) {
       todoListCont.removeChild(todoListCont.firstChild)
@@ -64,7 +67,7 @@ window.onload = function () {
 
 
 
-  const addTodo = (event) =>{
+  const addTodo = (event) => {
     event.preventDefault(); //prevents the page from reloading
     // for(let k = 0; k < todos.length; k++){
     //   let removeAll = document.getElementById(k);
@@ -83,13 +86,16 @@ window.onload = function () {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({item: addedItem, completed: false})
+        body: JSON.stringify({
+          item: addedItem,
+          completed: false
+        })
       });
       const content = await rawResponse.json();
-    
+
       console.log(content);
     })();
-   
+
     //fetch again to GET updated DB
     getData();
   }
@@ -98,17 +104,18 @@ window.onload = function () {
   const submitBtn = document.querySelector('#form-submit');
   submitBtn.addEventListener('click', addTodo, false);
 
-  const handleUpdate = (string) =>{
+  const handleUpdate = (string) => {
     event.preventDefault();
     string = string.wholeText;
     console.log(string);
     fetch('/ToDoList/list', {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'},
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-       item: string,
-       completed: true
+        item: string,
+        completed: true
       })
     })
     while (todoListCont.firstChild) {
